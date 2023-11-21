@@ -12,7 +12,7 @@ export default function Home() {
 		const fetchGenerations = async () => {
 			try {
 				const data = await getGenerations();
-				setGenerations(data);
+				setGenerations(['None', ...data]);
 			} catch (error) {
 				console.error('Error fetching generations:', error);
 			}
@@ -39,7 +39,7 @@ export default function Home() {
 					priority
 				/>
 			</div>
-			<h3 className='mb-4 font-semibold text-2xl'>
+			<h3 className='mb-8 font-semibold text-2xl'>
 				Interfaz Component Showdown
 			</h3>
 			<form className='flex flex-col justify-center'>
@@ -62,7 +62,6 @@ export default function Home() {
 						name='generations'
 						value={selectedGeneration}
 						onChange={handleGenerationChange}>
-						<option value=''>None</option>
 						{generations.map(generation => (
 							<option
 								key={generation}
