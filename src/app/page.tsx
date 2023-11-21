@@ -10,7 +10,7 @@ export default function Home() {
 		<main className='flex min-h-screen flex-col items-center pt-10'>
 			<div>
 				<Image
-					className='relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert mb-10'
+					className='relative dark:invert mb-10 w-auto h-auto'
 					src='https://pbs.twimg.com/media/FJWC5nCWYAQkjS0.png'
 					alt='Next.js Logo'
 					width={200}

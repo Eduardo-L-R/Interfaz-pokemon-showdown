@@ -3,8 +3,11 @@ import { getGenerations } from '@/utils/api';
 
 export function SelectGeneration() {
 	const [generations, setGenerations] = React.useState<string[]>([]);
-	const [selectedGeneration, setSelectedGeneration] =
-		React.useState<string>('');
+	const [selectedOption, setSelectedOption] = React.useState('');
+
+	const handleOptionClick = (option: any) => {
+		setSelectedOption(option);
+	};
 
 	React.useEffect(() => {
 		const fetchGenerations = async () => {
@@ -19,12 +22,6 @@ export function SelectGeneration() {
 		fetchGenerations();
 	}, []);
 
-	const handleGenerationChange = (
-		event: React.ChangeEvent<HTMLSelectElement>
-	) => {
-		setSelectedGeneration(event.target.value);
-	};
-
 	return (
 		<div className='mt-4'>
 			<label
@@ -36,12 +33,13 @@ export function SelectGeneration() {
 				className='text-black'
 				id='generations'
 				name='generations'
-				value={selectedGeneration}
-				onChange={handleGenerationChange}>
+				value={selectedOption}
+				onChange={e => setSelectedOption(e.target.value)}>
 				{generations.map(generation => (
 					<option
 						key={generation}
-						value={generation}>
+						value={generation}
+						onClick={() => handleOptionClick(generation)}>
 						{generation}
 					</option>
 				))}
