@@ -42,8 +42,8 @@ export default function Home() {
 			<h3 className='mb-4 font-semibold text-2xl'>
 				Interfaz Component Showdown
 			</h3>
-			<form>
-				<div className='flex gap-4'>
+			<form className='flex flex-col justify-center'>
+				<div className='flex gap-4 justify-center'>
 					<input
 						id='legend'
 						type='checkbox'
@@ -51,17 +51,18 @@ export default function Home() {
 					<label htmlFor='legend'>Legend</label>
 				</div>
 				<div className='mt-4'>
-					<label htmlFor='generations'>Select Generation:</label>
+					<label
+						className='mr-4'
+						htmlFor='generations'>
+						Select Generation:
+					</label>
 					<select
+						className='text-black'
 						id='generations'
 						name='generations'
 						value={selectedGeneration}
 						onChange={handleGenerationChange}>
-						<option
-							value=''
-							disabled>
-							Select a generation
-						</option>
+						<option value=''>None</option>
 						{generations.map(generation => (
 							<option
 								key={generation}
