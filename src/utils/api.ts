@@ -31,14 +31,25 @@ export async function getLegendaryPokemon(): Promise<PokemonSpecies[]> {
 }
 
 export async function fetchPokemonByGeneration(generation: string) {
-	const endpoint = `generation/${generation}`;
+	const generationMap: { [key: string]: string } = {
+		'generation-i': '1',
+		'generation-ii': '2',
+		'generation-iii': '3',
+		'generation-iv': '4',
+		'generation-v': '5',
+		'generation-vi': '6',
+		'generation-vii': '7',
+		'generation-viii': '8',
+		'generation-ix': '9'
+	};
+
+	const mappedGeneration = generationMap[generation];
+	const endpoint = `generation/${mappedGeneration}`;
 
 	try {
 		const data = await fetchData(endpoint);
-		console.log(data);
 		return data;
 	} catch (error) {
 		console.error('Error fetching data:', error);
 	}
 }
-
