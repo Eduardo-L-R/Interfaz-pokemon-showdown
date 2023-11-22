@@ -6,14 +6,18 @@ interface PokemonSpecies {
 }
 
 export async function fetchData<T>(endpoint: string): Promise<T> {
-	const response = await fetch(apiUrl + endpoint);
+	const url = apiUrl + endpoint;
+	const response = await fetch(url);
 	const data: T = await response.json();
 	return data;
 }
 
 export async function getGenerations(): Promise<string[]> {
-	const data = await fetchData<{ results: { name: string }[] }>('generation/');
-	return data.results.map(generation => generation.name);
+	const response = await fetchData<{ results: { name: string }[] }>(
+		'generation/'
+	);
+	const generations = response.results.map(result => result.name);
+	return generations;
 }
 
 export async function getLegendaryPokemon(): Promise<PokemonSpecies[]> {
@@ -25,3 +29,16 @@ export async function getLegendaryPokemon(): Promise<PokemonSpecies[]> {
 	);
 	return legendaryPokemon;
 }
+
+export async function fetchPokemonByGeneration(generation: string) {
+	const endpoint = `generation/${generation}`;
+
+	try {
+		const data = await fetchData(endpoint);
+		console.log(data);
+		return data;
+	} catch (error) {
+		console.error('Error fetching data:', error);
+	}
+}
+

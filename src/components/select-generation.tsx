@@ -1,11 +1,11 @@
 import React from 'react';
-import { getGenerations } from '@/utils/api';
+import { getGenerations, fetchPokemonByGeneration } from '@/utils/api';
 
 export function SelectGeneration() {
 	const [generations, setGenerations] = React.useState<string[]>([]);
 	const [selectedOption, setSelectedOption] = React.useState('');
 
-	const handleOptionClick = (option: any) => {
+	const handleOptionClick = (option: string) => {
 		setSelectedOption(option);
 	};
 
@@ -21,6 +21,19 @@ export function SelectGeneration() {
 
 		fetchGenerations();
 	}, []);
+
+	// Import and use fetchPokemonByGe˜˜˜åneration function
+	React.useEffect(() => {
+		const fetchPokemon = async () => {
+			try {
+				await fetchPokemonByGeneration(selectedOption);
+			} catch (error) {
+				console.error('Error fetching pokemon:', error);
+			}
+		};
+
+		fetchPokemon();
+	}, [selectedOption]);
 
 	return (
 		<div className='mt-4'>
